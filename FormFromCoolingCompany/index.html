@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilo.css">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <!-- links para exportar a excel -->
+     <script src="https://unpkg.com/xlsx@0.16.9/dist/xlsx.full.min.js"></script>
+     <script src="https://unpkg.com/file-saverjs@latest/FileSaver.min.js"></script>
+     <script src="https://unpkg.com/tableexport@latest/dist/js/tableexport.min.js"></script>
+</head>
+<body>
+    <main>
+        <h2>Inregrese sus datos</h2>
+        <form method="POST" action="datos.php" autocomplete="off" class="formulario" id="formulario">
+            <!-- Grupo nombre -->
+            <div class="formulario__grupo" id="grupo__nombre">
+                <label for="nombre" class="formulario__label">Nombre</label>
+                <div class="formulario__grupo-input">
+                    <input type="text" class="formulario__input" name="nombre" id="nombre" placeholder="Ingrese su nombre">
+                    <i class="formulario__validacion-estado fa-solid fa-times-circle"></i>
+                </div>
+                <p class="formulario__input-error">El nombre tiene que ser de 4 a 16 digitos y solo puede contener
+                    numeros y guiones</p>
+            </div>
+
+            <!-- Grupo apellido -->
+            <div class="formulario__grupo" id="grupo__apellido">
+                <label for="apellido" class="formulario__label">Apellido</label>
+                <div class="formulario__grupo-input">
+                    <input type="text" class="formulario__input" name="apellido" id="apellido" placeholder="Ingrese su apellido">
+                    <i class="formulario__validacion-estado fa-solid fa-times-circle"></i>
+                </div>
+                <p class="formulario__input-error">El apellido tiene que ser de 4 a 16 digitos y solo puede contener
+                    numeros y guiones</p>
+            </div>
+
+            <!-- Grupo Telefono -->
+            <div class="formulario__grupo" id="grupo__telefono">
+                <label for="telefono" class="formulario__label">Teléfono</label>
+                <div class="formulario__grupo-input">
+                    <input type="text" class="formulario__input" name="telefono" id="telefono" placeholder="6671123456">
+                    <i class="formulario__validacion-estado fa-solid fa-times-circle"></i>
+                </div>
+                <p class="formulario__input-error">El teléfono solo puede contener numero y maximo 10</p>
+            </div>
+
+            <!-- Ingrese su calle -->
+             <div class="formulario__grupo" id="grupo__calle">
+                <label for="calle" class="formulario__label">Calle</label>
+                <div class="formulario__grupo-input">
+                    <input type="text" class="formulario__input" name="calle" id="calle" placeholder="Ingrese la calle donde vive">
+                    <i class="formulario__validacion-estado fa-solid fa-times-circle"></i>
+                </div>
+                <p class="formulario__input-error">La calle no puede contener caracteres especiales</p>
+             </div>
+
+            <!-- Ingrese su colonia -->
+             <div class="formulario__grupo" id="grupo__colonia">
+                <label for="colonia" class="formulario__label">Colonia</label>
+                <div class="formulario__grupo-input">
+                    <input type="text" class="formulario__input" name="colonia" id="colonia" placeholder="Ingrese su colonia">
+                    <i class="formulario__validacion-estado fa-solid fa-times-circle"></i>
+                </div>
+                <p class="formulario__input-error">La colonia no puede contener caracteres especiales</p>
+             </div>
+
+            <!-- Ingrese el numero exterior de su casa -->
+            <div class="formulario__grupo" id="grupo__numeroExt">
+                <label for="numeroExt" class="formulario__label">Numero Exterior</label>
+                <div class="formulario__grupo-input">
+                    <input type="text" class="formulario__input" name="numeroExt" id="numeroExt" placeholder="Ingrese el numero exterior">
+                    <i class="formulario__validacion-estado fa-solid fa-times-circle"></i>
+                </div>
+                <p class="formulario__input-error">El numero exterior solo puede contener numero y "#"</p>
+            </div>
+
+            <!-- Grupo problema -->
+             <div class="formulario__grupo" id="grupo__problema">
+                <label for="problema" class="formulario__label">Que problema presenta</label>
+                <div class="formulario__grupo-input">
+                    <input type="text" class="formulario__input" name="problema" id="problema" placeholder="Comente cual es el prblema">
+                    <i class="formulario__validacion-estado fa-solid fa-times-circle"></i>
+                </div>
+                <p class="formulario__input-error">Este texto no puede llevar @,#,$,% ni ningun otro caracter especial</p>
+             </div>
+
+            <!-- Grupo de seleccion del municipio -->
+            <div class="formulario__grupo" id="grupo__municipio">
+                <label for="municipio" class="formulario__label">Ingrese su ciudad: </label>
+                <div class="formulario__grupo-input">
+                    <select id="municipio" name="municipio" class="formulario__input" onchange="mostrarOtroMunicipio(this)">
+                        <option value="">--Selecciona--</option>
+                        <option value="Ahome">Ahome</option>
+                        <option value="Angostura">Angostura</option>
+                        <option value="Badiraguato">Badiraguato</option>
+                        <option value="Choix">Choix</option>
+                        <option value="Concordia">Concordia</option>
+                        <option value="Cosala">Cosalá</option>
+                        <option value="Culiacan">Culiacán</option>
+                        <option value="Elota">Elota</option>
+                        <option value="Escuinapa">Escuinapa</option>
+                        <option value="Guasave">Guasave</option>
+                        <option value="Mazatlan">Mazatlán</option>
+                        <option value="Mocorito">Mocorito</option>
+                        <option value="Navolato">Navolato</option>
+                        <option value="Rosario">Rosario</option>
+                        <option value="Salvador Alvarado">Salvador Alvarado</option>
+                        <option value="San Ignacio">San Ignacio</option>
+                        <option value="Sinaloa de Leyva">Sinaloa</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                    <i class="formulario__validacion-estado fa-solid fa-times-circle"></i>
+                </div>
+                <p class="formulario__input-error">Necesita seleccionar una opcion si no la encuentra ingresa "Otro"</p>
+            </div>
+            <!-- Ingresar otro municipio -->
+            <div class="formulario_grupo" id="grupo__otroMunicipio">
+                <label for="otroMunicipio" class="formulario__label">Otra ciudad:</label>
+                <div class="formulario__grupo-input">
+                    <input type="text" class="formulario__input" id="otroMunicipio" name="otroMunicipio">
+                    <i class="formulario__validacion-estado fa-solid fa-times-circle"></i>
+                </div>
+            <p class="formulario__input-error">Este texto no puede llevar @,#,$,% ni ningun otro caracter especial</p>
+            </div>
+
+            <!-- Mensaje de error por si no relleno algun dato -->
+            <div class="formulario__mensaje" id="formulario__mensaje">
+                <p><i class="fas fa-exclamation-triangle"></i><b>Error:</b> Por favor rellena el formulario correctamente</p>
+            </div>
+
+            <div class="formulario__grupo formulario__grupo-btn-enviar">
+                <div id="resultado" class=""></div>
+                <button class="formulario__btn" value="Enviar" name="send" id="btnExportar" type="submit">Enviar</button>
+                <p class="formulario__mensaje-exito" id="formulario__mensaje-exito">Formulario enviado exitosamente</p>
+            </div>
+
+            <div class="formulario__grupo formulario__grupo-info">
+                <button class="formulario__btn" id="btnRedirigir" type="button" onclick="window.location.href='Info/index.html'">Info</button>
+            </div>
+            
+        </form>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/ed5759d6f7.js" crossorigin="anonymous"></script>
+    <script src="validacion.js"></script>
+</body>
+
+</html>
