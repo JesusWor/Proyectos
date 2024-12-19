@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -77,4 +78,85 @@
         <button class="botonAlinear" onclick="javascript:history.back()" ><h3><B>Regresar</B></h3></button>
     <script src="{{ url_for('static', filename='validar.js') }}"></script>
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos del Invernadero</title>
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="titulo-container">
+        <h1>Invernadero</h1>
+    </div>
+
+    <div class="row">
+        <!-- Gráficas -->
+        <div class="column">
+            <h2>Temperatura del aire</h2>
+            <canvas id="graficoTemperatura"></canvas>
+            <p>Temperatura: <span id="temperatura"></span></p>
+            <p><span id="timestamp_temp"></span></p>
+            <button onclick="cambiarEstadoRele2(true)">Encender Ventilador</button>
+            <button onclick="cambiarEstadoRele2(false)">Apagar Ventilador</button>
+        </div>
+
+        <div class="column">
+            <h2>Temperatura del suelo</h2>
+            <canvas id="graficoTemperaturaSuelo"></canvas>
+            <p>Temperatura: <span id="temperatura_suelo"></span></p>
+            <p><span id="timestamp_temp_suelo"></span></p>
+        </div>
+
+        <div class="column">
+            <h2>Humedad del aire</h2>
+            <canvas id="graficoHumedad"></canvas>
+            <p>Humedad: <span id="humedad"></span></p>
+            <p><span id="timestamp_hum"></span></p>
+            <button onclick="cambiarEstadoRele3(true)">Encender Humificador</button>
+            <button onclick="cambiarEstadoRele3(false)">Apagar Humificador</button>
+        </div>
+
+        <div class="column">
+            <h2>Humedad del suelo</h2>
+            <canvas id="graficoHumedadSuelo"></canvas>
+            <p>Humedad: <span id="humedad_suelo"></span></p>
+            <p><span id="timestamp_hum_suelo"></span></p>
+            <button onclick="cambiarEstadoReleRiego(true)">Encender riego</button>
+            <button onclick="cambiarEstadoReleRiego(false)">Apagar riego</button>
+        </div>
+
+        <div class="column">
+            <h2>Intensidad de luz</h2>
+            <canvas id="graficoIntensidadLuz"></canvas>
+            <p>Luz: <span id="intensidad_luz"></span></p>
+            <p><span id="timestamp_intensidad"></span></p>
+            <button onclick="cambiarEstadoRele1(true)">Encender Lampara</button>
+            <button onclick="cambiarEstadoRele1(false)">Apagar Lampara</button>
+        </div>
+
+        <div class="column">
+            <h2>pH del suelo</h2>
+            <canvas id="graficoPH"></canvas>
+            <p>pH: <span id="phSuelo"></span></p>
+            <p><span id="timestamp_ph"></span></p>
+        </div>
+        
+        <div class="column">
+            <h2>Datos de GDD</h2>
+            <p>Gdd acumulado: <span id="gdd">1000</span></p>
+            <p>Gdd necesario: <span id="gdd_dias">1200</span></p>
+            <p>Dias para cosecha: <sapn id="dias">20</sapn></p>
+        </div>
+    </div>
+
+        <button class="botonAlinear" onclick="javascript:history.back()" ><h3><B>Regresar</B></h3></button>
+    <script src="{{ url_for('static', filename='validar.js') }}"></script>
+</body>
+>>>>>>> e286d3dd824c801585381b8490ecb090dceb6472
 </html>

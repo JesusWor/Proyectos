@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body {
   font-family: Arial, Libre Baskerville;
   background-image: url("https://png.pngtree.com/background/20211216/original/pngtree-agricultural-planting-greenhouse-vegetables-photographs-picture-image_1522905.jpg");
@@ -215,3 +216,222 @@ main {
     opacity: 0;
     animation-fill-mode: forwards;
 }
+=======
+body {
+  font-family: Arial, Libre Baskerville;
+  background-image: url("https://png.pngtree.com/background/20211216/original/pngtree-agricultural-planting-greenhouse-vegetables-photographs-picture-image_1522905.jpg");
+  background-size: cover;  /*Ajusta la imagen para cubrir toda la pantalla */
+  background-position: center;  /*Centra la imagen */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  color: rgba(255, 255, 255, 1.0);
+}
+
+main {
+    max-width: 1200px;
+    width: 90%;
+    display: grid;
+    place-items: center;
+    padding: 40px;
+}
+
+.texto {
+    font-family: Libre Baskerville; 
+    font-size: 25px; 
+    display: flex; 
+    justify-content: center; 
+    align-items:center;
+    padding-bottom: 5px;
+    white-space: pre-line;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(110, 120, 130, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 400px; /* Tamaño mínimo para evitar cambios drásticos */
+    min-height: 400px; /* Altura mínima para evitar cambios bruscos */
+    max-height: 700px;
+    overflow: hidden;
+    transition: height 0.3s ease; /* Suaviza los cambios de tamaño */
+}
+
+.userForm_group {
+    margin-bottom: 15px;
+    position: relative;
+    width: 100%;        
+    max-width: 300px;
+}
+
+.userForm_group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.userForm_input, select {
+    width: 100%; /* Asegura el mismo ancho */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Evita inconsistencias por padding */
+    font-size: 16px;
+    max-width: 300px;
+}
+
+.userForm_input {
+    width: 90%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.button-container{
+    display: grid;
+    place-items: center;
+}
+
+.userForm_btn {
+    width: 80%;
+    max-width: 300px;
+    background-color: #263868;
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 9px;     
+    cursor: pointer;
+    padding: 10px;
+    margin: 0px;
+    font-size: 16px;
+}
+
+.userForm_btn:hover {
+    background-color: #91b2f8
+}
+
+#group_codigo {
+    display: none;
+    margin-top: 20px;
+    transition: opacity 0.3s ease;
+}
+
+#group_codigo.visible{
+    display: block;
+    opacity: 1;
+}
+
+.userForm_label {
+    margin-top: 20px;
+    font-size: 18px;
+    font-family: Libre Baskerville;
+}
+
+/* Errores */
+.userForm_input-error {
+    font-size: 12px;
+    margin-bottom: 0;
+    display: none; /* Desaparece el label */
+}
+
+.userForm_input-error-activo {
+    display: block; /* Aparece el label */
+}
+
+.userForm_validacion-estado {
+    display: grid;
+    place-items: center;
+    font-size: 16px;
+    opacity: 0;
+}
+
+.userForm_group-incorrecto 
+.userForm_label {
+    color: #BB2929;
+}
+
+.userForm_group-incorrecto 
+.userForm_validacion-estado {
+    color: #BB2929;
+    opacity: 1;
+}
+
+.userForm_group-incorrecto 
+.userForm_input {
+    border: 3px solid #BB2929;
+}
+
+/* Validacion */
+.userForm_mensaje {
+    height: 45px;
+    line-height: 45px;
+    background: #F66060;
+    padding: 0 15px;
+    border-radius: 3px;
+    display: none;
+}
+
+.userForm_mensaje-activo {
+    display: block;
+}
+
+.userForm_mensaje p {
+    margin: 0;
+}
+
+.userForm_mensaje-exito {
+    font-size: 14px;
+    color: #119200;
+    display: none;
+}
+
+.userForm_mensaje-exito-activo {
+    display: block;
+}
+
+.userForm_group-correcto 
+.userForm_validacion-estado {
+    color: #1ED12D;
+    opacity: 1;
+}
+
+.userForm_group-correcto 
+.userForm_label {
+    color: #1ED12D;
+}
+
+.userForm_group-correcto 
+.userForm_validacion-estado {
+    color: #1ED12D;
+    opacity: 1;
+}
+
+.userForm_group-correcto 
+.userForm_input {
+    border: 3px solid #1ED12D;
+}
+
+/* Animacion */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 1s ease-in-out;
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+>>>>>>> e286d3dd824c801585381b8490ecb090dceb6472
