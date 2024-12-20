@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="formulario.css">
+    <title>Ingreso de tarea</title>
+</head>
+<body>
+    <main>
+        <form method="post" class="formulario" id="formulario">
+            <!-- Grupo materia -->
+            <div class="formulario__grupo" id="grupo__materia">
+                <label for="materia" class="formulario__label">Materia</label>
+                <div class="formulario__grupo-input">
+                    <input type="text" class="formulario__input" name="materia" id="materia">
+                    <i class="formulario__validacion-estado fa-solid fa-times-circle"></i>
+                </div>
+                <p class="formulario__input-error">El nombre de la materia no puede estar vacio</p>
+            </div>
+
+            <!-- Grupo nombreTarea -->
+            <div class="formulario__grupo" id="grupo__nombreTarea">
+                <label for="nombreTarea" class="formulario__label">Nombre de la tarea</label>
+                <div class="formulario__grupo-input">
+                    <input type="text" class="formulario__input" name="nombreTarea" id="nombreTarea">
+                    <i class="formulario__validacion-estado fa-solid fa-times-circle"></i>
+                </div>
+                <p class="formulario__input-error">El nombre de la tarea no puede estar vacío</p>
+            </div>
+
+            <!-- Grupo Descripcion -->
+            <div class="formulario__grupo" id="grupo__descripcion">
+                <label for="descripcion" class="formulario__label">Descripcion de la tarea</label>
+                <div class="formulario__grupo-input">
+                    <input type="text" class="formulario__input" name="descripcion" id="descripcion">
+                    <i class="formulario__validacion-estado fa-solid fa-times-circle"></i>
+                </div>
+                <p class="formulario__input-error">La descripcion de la tarea no puede estar vacío</p>
+            </div>
+
+            <div class="formulario__mensaje" id="formulario__mensaje">
+                <p><i class="fas fa-exclamation-triangle"></i><b>Error:</b> Por favor rellena el formulario correctamente</p>
+            </div>
+
+            <div class="formulario__grupo formulario__grupo-btn-enviar">
+                <button class="formulario__btn" type="submit">Agregar</button>
+                <p class="formulario__mensaje-exito" id="formulario__mensaje-exito">Tarea agregada exitosamente</p>
+            </div>
+
+            <div class="formulario__grupo formulario__grupo-btn-regresar">
+                <button class="formulario__btn" type="submit">Regresar</button>
+            </div>
+        </form>
+    </main>
+    <script src="formulario.js"></script>  <!-- archivo con la validadcion de los datos -->
+    <script src="https://kit.fontawesome.com/ed5759d6f7.js" crossorigin="anonymous"></script> <!-- Links para los diseños de la validadcion -->
+</body>
+</html>
