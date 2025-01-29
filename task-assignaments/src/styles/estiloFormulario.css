@@ -1,0 +1,181 @@
+/* General styles for the app container */
+.app {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: #f4f4f4;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Button to open the form */
+.open-form-button {
+  padding: 12px 18px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s;
+}
+
+.open-form-button:hover {
+  background-color: #0056b3;
+}
+
+/* Overlay background when the form is open */
+.form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Form container styles */
+.form-container {
+  background-color: white;
+  padding: 25px;
+  border-radius: 10px;
+  width: 400px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+/* Close button (X) */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  background-color: #c82333;
+}
+
+/* Input and textarea styling */
+form input,
+form textarea {
+  width: calc(90% - 20px);
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  background-color: #f8f8f8;
+}
+
+/* Improve placeholder visibility */
+form input::placeholder,
+form textarea::placeholder {
+  color: #666;
+  font-style: italic;
+}
+
+/* Date input styling */
+form input[type='date'] {
+  cursor: pointer;
+}
+
+/* Form submit button */
+form button {
+  padding: 12px;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  width: 100%;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+form button:hover {
+  background-color: #218838;
+}
+
+/* Task list styles */
+.task-list {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Task text styling */
+.task-item span {
+  flex-grow: 1;
+  font-size: 16px;
+}
+
+/* Buttons inside .task-item */
+.task-item button {
+  padding: 8px 12px;
+  margin-left: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Edit and delete button styles */
+.task-item button:nth-of-type(1) {
+  background-color: #007bff;
+  color: white;
+}
+
+.task-item button:nth-of-type(1):hover {
+  background-color: #0056b3;
+}
+
+.task-item button:nth-of-type(2) {
+  background-color: #dc3545;
+  color: white;
+}
+
+.task-item button:nth-of-type(2):hover {
+  background-color: #c82333;
+}
+
+/* Notification and error messages */
+.notification {
+  background-color: #28a745;
+  color: white;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.error {
+  color: red;
+  margin-bottom: 10px;
+}
