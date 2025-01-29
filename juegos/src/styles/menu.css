@@ -1,0 +1,28 @@
+.menu {
+  text-align: center;
+  padding: 2rem;
+}
+.menu-title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+.menu-options {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+.menu-item {
+  text-decoration: none;
+  color: inherit;
+}
+.menu-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 1rem;
+}
+.menu-text {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 1.2rem;
+}
