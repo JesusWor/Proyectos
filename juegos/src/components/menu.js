@@ -34,6 +34,8 @@ function Menu() {
           <span className="menu-text">Conecta 4</span>
         </Link>
       </div>
+
+      <div className="menu-options"></div>
     </div>
   )
 }

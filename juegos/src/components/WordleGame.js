@@ -198,6 +198,12 @@ function Wordle() {
     setInput(Array(5).fill(''))
     inputRefs.current[0]?.focus()
 
+    if (intentos.length >= 5) {
+      toast.success(
+        `¡Lo siento!, Se han agotado los intentos la palabra era ${palabraAdivinar}.`
+      )
+      setTimeout(() => reiniciarJuego(), 5000)
+    }
     if (palabraIngresada === palabraAdivinar) {
       toast.success(
         '¡Felicidades! Has adivinado la palabra. Reiniciando el juego...'
