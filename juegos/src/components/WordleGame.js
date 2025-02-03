@@ -96,6 +96,7 @@ const palabras = [
 
 const obtenerPalabraAleatoria = () =>
   palabras[Math.floor(Math.random() * palabras.length)]
+
 const tecladoLetras = 'abcdefghijklmnopqrstuvwxyz'.split('')
 
 function Wordle() {
@@ -140,33 +141,37 @@ function Wordle() {
   const manejarSubmit = (e) => {
     e.preventDefault()
     const palabraIngresada = input.join('')
+    // Validación de longitud
     if (palabraIngresada.length !== 5) {
       setMensaje('La palabra debe tener 5 letras.')
       return
     }
 
     const resultadoIntento = Array(5).fill({ letra: '', color: 'gray' })
-    const letrasAdivinadas = {}
+    const palabraAdivinarArray = palabraAdivinar.split('')
+    const letrasUsadas = {}
 
     // Primero, marcar las letras correctas (verde) y contar las letras correctas en la palabra a adivinar
-    palabraAdivinar.split('').forEach((letra, index) => {
-      if (letra === palabraIngresada[index]) {
+    palabraIngresada.split('').forEach((letra, index) => {
+      if (letra === palabraAdivinarArray[index]) {
         resultadoIntento[index] = { letra, color: 'green' }
-        letrasAdivinadas[letra] = (letrasAdivinadas[letra] || 0) + 1
+        letrasUsadas[letra] = (letrasUsadas[letra] || 0) + 1
       }
     })
 
     // Luego, marcar las letras presentes pero en posiciones incorrectas (amarillo)
     palabraIngresada.split('').forEach((letra, index) => {
-      if (resultadoIntento[index].color !== 'green') {
-        if (palabraAdivinar.includes(letra)) {
-          const conteoAdivinadas = palabraAdivinar
-            .split('')
-            .filter((l) => l === letra).length
-          if ((letrasAdivinadas[letra] || 0) < conteoAdivinadas) {
-            resultadoIntento[index] = { letra, color: 'yellow' }
-            letrasAdivinadas[letra] = (letrasAdivinadas[letra] || 0) + 1
-          }
+      if (
+        resultadoIntento[index].color !== 'green' &&
+        palabraAdivinar.includes(letra)
+      ) {
+        const totalenPalabra = palabraAdivinarArray.filter(
+          (l) => l === letra
+        ).length
+        const yaContadas = letrasUsadas[letra] || 0
+        if (yaContadas < totalenPalabra) {
+          resultadoIntento[index] = { letra, color: 'yellow' }
+          letrasUsadas[letra] = yaContadas + 1
         }
       }
     })
@@ -178,10 +183,14 @@ function Wordle() {
       }
     })
 
-    // Actualizar el teclado y las letras grises
+    // Actualizar el teclado con colores
     palabraIngresada.split('').forEach((letra, index) => {
-      if (resultadoIntento[index].color === 'gray') {
-        setTeclado((prev) => ({ ...prev, [letra]: 'gray' }))
+      if (!teclado[letra] || teclado[letra] === 'gray') {
+        setTeclado((prev) => {
+          const nuevoTeclado = { ...prev }
+          nuevoTeclado[letra] = resultadoIntento[index].color
+          return nuevoTeclado
+        })
       }
     })
 
@@ -193,7 +202,7 @@ function Wordle() {
       toast.success(
         '¡Felicidades! Has adivinado la palabra. Reiniciando el juego...'
       )
-      setTimeout(() => reiniciarJuego(), 3000) // Reinicia el juego después de 3 segundos
+      setTimeout(() => reiniciarJuego(), 5000) // Reinicia el juego después de 3 segundos
     }
   }
 
