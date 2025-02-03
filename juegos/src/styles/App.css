@@ -32,3 +32,329 @@
 .reset-button:hover {
   background-color: #45a049;
 }
+
+body {
+  background-color: #f3f4f6; /* Fondo claro y limpio */
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Ocupa toda la altura de la ventana */
+}
+
+.game-container {
+  background: #ffffff; /* Fondo blanco */
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  text-align: center;
+  width: 90%;
+  max-width: 600px;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.current-player {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 20px;
+  color: #555;
+}
+
+footer {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Estilo de los botones */
+button.reset-button {
+  background-color: #4caf50; /* Verde suave */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  margin: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button.reset-button:hover {
+  background-color: #45a049; /* Verde oscuro al pasar el mouse */
+}
+
+/* Estilos para el juego de Wordle */
+.wordle-container {
+  text-align: center;
+  margin-top: 50px;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100vh;
+}
+
+.wordle-left,
+.wordle-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+h1 {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+.wordle-intentos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.wordle-intento {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+}
+
+.wordle-letra {
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: 2px solid #d3d6da;
+  background-color: white;
+}
+
+.wordle-letra.gray {
+  background-color: #787c7e;
+  color: white;
+}
+
+.wordle-letra.yellow {
+  background-color: #c9b458;
+  color: white;
+}
+
+.wordle-letra.green {
+  background-color: #6aaa64;
+  color: white;
+}
+
+.wordle-keyboard {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+  max-width: 300px;
+}
+
+.wordle-key {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border: 1px solid #d3d6da;
+  border-radius: 5px;
+  background-color: #e0e0e0;
+  text-align: center;
+  font-weight: bold;
+}
+
+.wordle-key.gray {
+  background-color: #787c7e;
+  color: white;
+}
+
+.wordle-key.yellow {
+  background-color: #c9b458;
+  color: white;
+}
+
+.wordle-key.green {
+  background-color: #6aaa64;
+  color: white;
+}
+
+.wordle-input-container {
+  display: flex;
+  justify-content: center;
+  margin-right: 50%;
+  gap: 5px;
+}
+
+.wordle-input {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: 2px solid #d3d6da;
+}
+
+/* ------------------------------------- 
+Estilos para el juego de conecta 4 
+-------------------------------------- */
+:root {
+  --size: 100px;
+  --p1: #f1bf3a;
+  --p2: #ec0b07;
+}
+
+@media (max-width: 600px) {
+  :root {
+    --size: 50px;
+  }
+}
+
+@media (min-width: 601px) {
+  :root {
+    --size: 100px;
+  }
+}
+
+.conecta4-app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: -80px;
+}
+
+.conecta4-board {
+  display: grid;
+  grid-template-columns: repeat(7, var(--size));
+  grid-template-rows: repeat(6, var(--size));
+  position: relative;
+}
+
+.conecta4-board div {
+  background: url('../clip.svg');
+}
+
+.conecta4-drop-zone {
+  height: calc(var(--size) * 1.2);
+  background: linear-gradient(to bottom, #1e3c72, #2a5298);
+  border-radius: 15px 15px 0px 0px;
+}
+
+.conecta4-drop-zone div {
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  position: absolute;
+}
+
+.conecta4-winner-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7); /* Oscurece el fondo */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Asegura que esté por encima de todo */
+}
+
+.conecta4-winner-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 300px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  animation: popup 0.3s ease-in-out; /* Animación de aparición */
+}
+
+@keyframes popup {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.conecta4-drop-zone .p1 {
+  background-color: var(--p1);
+}
+
+.conecta4-drop-zone .p2 {
+  background-color: var(--p2);
+}
+
+.conecta4-drop-zone .active {
+  transition: all ease-in-out 500ms;
+}
+
+.conecta4-drop-zone .active.column-0 {
+  margin-left: 0;
+}
+.conecta4-drop-zone .active.column-1 {
+  margin-left: 100px;
+}
+.conecta4-drop-zone .active.column-2 {
+  margin-left: 200px;
+}
+.conecta4-drop-zone .active.column-3 {
+  margin-left: 300px;
+}
+.conecta4-drop-zone .active.column-4 {
+  margin-left: 400px;
+}
+.conecta4-drop-zone .active.column-5 {
+  margin-left: 500px;
+}
+.conecta4-drop-zone .active.column-6 {
+  margin-left: 600px;
+}
+
+.conecta4-drop-zone .active.row-0 {
+  transform: translateY(120px);
+}
+.conecta4-drop-zone .active.row-1 {
+  transform: translateY(220px);
+}
+.conecta4-drop-zone .active.row-2 {
+  transform: translateY(320px);
+}
+.conecta4-drop-zone .active.row-3 {
+  transform: translateY(420px);
+}
+.conecta4-drop-zone .active.row-4 {
+  transform: translateY(520px);
+}
+.conecta4-drop-zone .active.row-5 {
+  transform: translateY(620px);
+}
+
+.conecta4-drop-zone .active.active.column--.row-- {
+  transition: none;
+}
+
+.conecta4-drop-zone p {
+  display: grid;
+  place-content: center;
+}

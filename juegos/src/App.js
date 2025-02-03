@@ -1,10 +1,11 @@
 import React from 'react'
-import GameLogic from './components/logicaTicTac' // Ruta correcta al archivo
 import './styles/App.css'
-import './styles/estiloTicTac.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Menu from './components/menu'
+import GameLogic from './components/logicaTicTac'
 import GameFlappyBird from './components/GameFalppyBird'
+import GameWordle from './components/WordleGame'
+import GameConecta4 from './components/Conecta4Game'
 
 const App = () => {
   return (
@@ -12,9 +13,11 @@ const App = () => {
       <Routes>
         {/* Ruta del menú */}
         <Route path="/" element={<Menu />} />
-        {/* Ruta del juego */}
+        {/* Ruta de los juegos */}
         <Route path="/TicTacToe" element={<GameLogic />} />
         <Route path="/FlappyBird" element={<GameFlappyBird />} />
+        <Route path="/Wordle" element={<GameWordle />} />
+        <Route path="/Conecta4" element={<GameConecta4 />} />
       </Routes>
     </Router>
   )
