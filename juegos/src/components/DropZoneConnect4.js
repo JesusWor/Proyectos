@@ -7,49 +7,32 @@ const DropZone = () => {
   const [turn, setTurn] = useState(1)
   const [winner, setWinner] = useState(0)
   const [dropped, setDropped] = useState([])
+  const [hoveredColumn, setHoveredColumn] = useState(null)
 
-  const checkWinner = (player) => {
-    const playerDrops = dropped.filter((d) => d.player === player)
-    for (let { x, y } of playerDrops) {
-      // Horizontal
-      if (
-        playerDrops.find((m) => x === m.x + 1 && y === m.y) &&
-        playerDrops.find((m) => x === m.x + 2 && y === m.y) &&
-        playerDrops.find((m) => x === m.x + 3 && y === m.y)
-      )
-        return player
-
-      // Vertical
-      if (
-        playerDrops.find((m) => x === m.x && y === m.y + 1) &&
-        playerDrops.find((m) => x === m.x && y === m.y + 2) &&
-        playerDrops.find((m) => x === m.x && y === m.y + 3)
-      )
-        return player
-
-      // Diagonal descendente
-      if (
-        playerDrops.find((m) => x === m.x + 1 && y === m.y + 1) &&
-        playerDrops.find((m) => x === m.x + 2 && y === m.y + 2) &&
-        playerDrops.find((m) => x === m.x + 3 && y === m.y + 3)
-      )
-        return player
-
-      // Diagonal ascendente
-      if (
-        playerDrops.find((m) => x === m.x + 1 && y === m.y - 1) &&
-        playerDrops.find((m) => x === m.x + 2 && y === m.y - 2) &&
-        playerDrops.find((m) => x === m.x + 3 && y === m.y - 3)
-      )
-        return player
+  const handleMouseMove = (e) => {
+    const boardRect = e.currentTarget.getBoundingClientRect()
+    const columnIndex = Math.floor((e.clientX - boardRect.left) / size)
+    if (columnIndex >= 0 && columnIndex < cols) {
+      setHoveredColumn(columnIndex)
     }
-    return 0
   }
 
-  const reset = () => {
-    setTurn(1)
-    setDropped([])
-    setWinner(0)
+  const handleBoardClick = () => {
+    if (hoveredColumn !== null) {
+      dropCoin(hoveredColumn)
+    }
+  }
+
+  const dropCoin = (col) => {
+    if (winner || dropped.find((drop) => drop.x === 0 && drop.y === col)) {
+      return
+    }
+
+    const len = 5 - dropped.filter((drop) => drop.y === col).length
+    if (len < 0) return
+
+    setDropped([...dropped, { x: len, y: col, player: turn }])
+    setTurn(turn === 1 ? 2 : 1)
   }
 
   useEffect(() => {
@@ -69,10 +52,52 @@ const DropZone = () => {
     }
   }, [dropped])
 
-  useEffect(() => console.log(winner), [winner])
+  const checkWinner = (player) => {
+    const playerDrops = dropped.filter((d) => d.player === player)
+    for (let { x, y } of playerDrops) {
+      if (
+        playerDrops.find((m) => x === m.x + 1 && y === m.y) &&
+        playerDrops.find((m) => x === m.x + 2 && y === m.y) &&
+        playerDrops.find((m) => x === m.x + 3 && y === m.y)
+      )
+        return player
+
+      if (
+        playerDrops.find((m) => x === m.x && y === m.y + 1) &&
+        playerDrops.find((m) => x === m.x && y === m.y + 2) &&
+        playerDrops.find((m) => x === m.x && y === m.y + 3)
+      )
+        return player
+
+      if (
+        playerDrops.find((m) => x === m.x + 1 && y === m.y + 1) &&
+        playerDrops.find((m) => x === m.x + 2 && y === m.y + 2) &&
+        playerDrops.find((m) => x === m.x + 3 && y === m.y + 3)
+      )
+        return player
+
+      if (
+        playerDrops.find((m) => x === m.x + 1 && y === m.y - 1) &&
+        playerDrops.find((m) => x === m.x + 2 && y === m.y - 2) &&
+        playerDrops.find((m) => x === m.x + 3 && y === m.y - 3)
+      )
+        return player
+    }
+    return 0
+  }
+
+  const reset = () => {
+    setTurn(1)
+    setDropped([])
+    setWinner(0)
+  }
 
   return (
-    <div className="conecta4-drop-zone">
+    <div
+      className="conecta4-drop-zone"
+      onMouseMove={handleMouseMove}
+      onClick={handleBoardClick}
+    >
       {dropped.map((m, i) => (
         <div
           key={i}
@@ -94,6 +119,7 @@ const DropZone = () => {
           setDropped={setDropped}
           setTurn={setTurn}
           canDrop={dropped.length < rows * cols && winner === 0}
+          hoveredColumn={hoveredColumn}
         />
       )}
     </div>

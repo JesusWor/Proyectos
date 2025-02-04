@@ -92,18 +92,10 @@ button.reset-button:hover {
 
 /* Estilos para el juego de Wordle */
 .wordle-container {
-  text-align: center;
-  margin-top: 50px;
-  font-family: Arial, sans-serif;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-  height: 100vh;
 }
 
 .wordle-left,
@@ -196,7 +188,6 @@ h1 {
 .wordle-input-container {
   display: flex;
   justify-content: center;
-  margin-right: 50%;
   gap: 5px;
 }
 
@@ -217,18 +208,6 @@ Estilos para el juego de conecta 4
   --size: 100px;
   --p1: #f1bf3a;
   --p2: #ec0b07;
-}
-
-@media (max-width: 600px) {
-  :root {
-    --size: 50px;
-  }
-}
-
-@media (min-width: 601px) {
-  :root {
-    --size: 100px;
-  }
 }
 
 .conecta4-app {
@@ -284,17 +263,6 @@ Estilos para el juego de conecta 4
   width: 300px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
   animation: popup 0.3s ease-in-out; /* Animación de aparición */
-}
-
-@keyframes popup {
-  from {
-    transform: scale(0.7);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
 }
 
 .conecta4-drop-zone .p1 {
@@ -357,4 +325,33 @@ Estilos para el juego de conecta 4
 .conecta4-drop-zone p {
   display: grid;
   place-content: center;
+}
+
+/* 📱 Estilos específicos para móviles */
+@media (max-width: 600px) {
+  .game-container {
+    padding: 15px;
+  }
+
+  .wordle-container {
+    max-width: 100%;
+  }
+
+  .wordle-input {
+    font-size: 1.2rem;
+  }
+
+  .conecta4-app {
+    margin-top: -40px;
+  }
+
+  .conecta4-board {
+    grid-template-columns: repeat(7, var(--size));
+    grid-template-rows: repeat(6, var(--size));
+  }
+
+  .reset-button {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+  }
 }
