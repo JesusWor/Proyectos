@@ -36,7 +36,7 @@ const ActiveCoin = ({
 
     setRow(len)
     setTimeout(() => {
-      setDropped([...dropped, { x: len, y: col, player: turn }])
+      setDropped([...dropped, { x: len, y: col || 0, player: turn }])
       setTurn(turn === 1 ? 2 : 1)
     }, 400)
   }

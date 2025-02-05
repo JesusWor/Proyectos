@@ -81,7 +81,7 @@ button.reset-button {
   padding: 10px 20px;
   font-size: 1rem;
   border-radius: 5px;
-  margin: 10px;
+  margin: auto;
   cursor: pointer;
   transition: background-color 0.3s;
 }
@@ -104,11 +104,12 @@ button.reset-button:hover {
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  margin-bottom: -30px;
 }
 
 h1 {
   font-size: 2em;
-  margin-bottom: 10px;
+  margin-bottom: auto;
 }
 
 .wordle-intentos {
@@ -205,7 +206,7 @@ h1 {
 Estilos para el juego de conecta 4 
 -------------------------------------- */
 :root {
-  --size: 100px;
+  --size: 80px;
   --p1: #f1bf3a;
   --p2: #ec0b07;
 }
@@ -236,8 +237,8 @@ Estilos para el juego de conecta 4
 }
 
 .conecta4-drop-zone div {
-  width: var(--size);
-  height: var(--size);
+  width: calc(var(--size) * 0.96);
+  height: calc(var(--size) * 0.96);
   border-radius: 50%;
   position: absolute;
 }
@@ -248,11 +249,11 @@ Estilos para el juego de conecta 4
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.7); /* Oscurece el fondo */
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Asegura que esté por encima de todo */
+  z-index: 1000;
 }
 
 .conecta4-winner-content {
@@ -274,48 +275,48 @@ Estilos para el juego de conecta 4
 }
 
 .conecta4-drop-zone .active {
-  transition: all ease-in-out 500ms;
+  transition: all 0.5s ease-in-out;
 }
 
 .conecta4-drop-zone .active.column-0 {
   margin-left: 0;
 }
 .conecta4-drop-zone .active.column-1 {
-  margin-left: 100px;
+  margin-left: calc(var(--size) * 1);
 }
 .conecta4-drop-zone .active.column-2 {
-  margin-left: 200px;
+  margin-left: calc(var(--size) * 2);
 }
 .conecta4-drop-zone .active.column-3 {
-  margin-left: 300px;
+  margin-left: calc(var(--size) * 3);
 }
 .conecta4-drop-zone .active.column-4 {
-  margin-left: 400px;
+  margin-left: calc(var(--size) * 4);
 }
 .conecta4-drop-zone .active.column-5 {
-  margin-left: 500px;
+  margin-left: calc(var(--size) * 5);
 }
 .conecta4-drop-zone .active.column-6 {
-  margin-left: 600px;
+  margin-left: calc(var(--size) * 6);
 }
 
 .conecta4-drop-zone .active.row-0 {
-  transform: translateY(120px);
+  transform: translateY(calc(var(--size) * 1.26));
 }
 .conecta4-drop-zone .active.row-1 {
-  transform: translateY(220px);
+  transform: translateY(calc(var(--size) * 2.2));
 }
 .conecta4-drop-zone .active.row-2 {
-  transform: translateY(320px);
+  transform: translateY(calc(var(--size) * 3.2));
 }
 .conecta4-drop-zone .active.row-3 {
-  transform: translateY(420px);
+  transform: translateY(calc(var(--size) * 4.2));
 }
 .conecta4-drop-zone .active.row-4 {
-  transform: translateY(520px);
+  transform: translateY(calc(var(--size) * 5.2));
 }
 .conecta4-drop-zone .active.row-5 {
-  transform: translateY(620px);
+  transform: translateY(calc(var(--size) * 6.2));
 }
 
 .conecta4-drop-zone .active.active.column--.row-- {
@@ -328,30 +329,76 @@ Estilos para el juego de conecta 4
 }
 
 /* 📱 Estilos específicos para móviles */
-@media (max-width: 600px) {
-  .game-container {
-    padding: 15px;
-  }
-
+@media (max-width: 500px) {
   .wordle-container {
-    max-width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
   }
 
   .wordle-input {
-    font-size: 1.2rem;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
   }
 
-  .conecta4-app {
-    margin-top: -40px;
+  .wordle-key {
+    width: 35px;
+    height: 35px;
+    font-size: 14px;
+  }
+  /* Adaptacones para conecta 4*/
+  :root {
+    --size: 50px;
+    --p1: #f1bf3a;
+    --p2: #ec0b07;
   }
 
-  .conecta4-board {
-    grid-template-columns: repeat(7, var(--size));
-    grid-template-rows: repeat(6, var(--size));
+  .conecta4-drop-zone .active {
+    position: absolute;
+    transition: margin-left 0.3s, transform 0.3s;
   }
 
-  .reset-button {
-    font-size: 0.9rem;
-    padding: 8px 15px;
+  .conecta4-drop-zone .active.column-0 {
+    margin-left: calc(var(--size) * 0);
+  }
+  .conecta4-drop-zone .active.column-1 {
+    margin-left: calc(var(--size) * 1);
+  }
+  .conecta4-drop-zone .active.column-2 {
+    margin-left: calc(var(--size) * 2);
+  }
+  .conecta4-drop-zone .active.column-3 {
+    margin-left: calc(var(--size) * 3);
+  }
+  .conecta4-drop-zone .active.column-4 {
+    margin-left: calc(var(--size) * 4);
+  }
+  .conecta4-drop-zone .active.column-5 {
+    margin-left: calc(var(--size) * 5);
+  }
+  .conecta4-drop-zone .active.column-6 {
+    margin-left: calc(var(--size) * 6);
+  }
+
+  .conecta4-drop-zone .active.row-0 {
+    transform: translateY(
+      calc(var(--size) * 1.26)
+    ); /* Ajustado para una mejor alineación */
+  }
+  .conecta4-drop-zone .active.row-1 {
+    transform: translateY(calc(var(--size) * 2.2));
+  }
+  .conecta4-drop-zone .active.row-2 {
+    transform: translateY(calc(var(--size) * 3.2));
+  }
+  .conecta4-drop-zone .active.row-3 {
+    transform: translateY(calc(var(--size) * 4.2));
+  }
+  .conecta4-drop-zone .active.row-4 {
+    transform: translateY(calc(var(--size) * 5.2));
+  }
+  .conecta4-drop-zone .active.row-5 {
+    transform: translateY(calc(var(--size) * 6.2));
   }
 }

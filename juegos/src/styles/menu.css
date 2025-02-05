@@ -2,27 +2,60 @@
   text-align: center;
   padding: 2rem;
 }
+
 .menu-title {
   font-size: 2rem;
   margin-bottom: 1.5rem;
 }
+
 .menu-options {
   display: flex;
   justify-content: center;
-  gap: 2rem;
+  flex-wrap: wrap; /* Permite que los elementos pasen a otra línea si no caben */
+  gap: 1.5rem;
 }
+
 .menu-item {
   text-decoration: none;
   color: inherit;
+  text-align: center;
+  max-width: 150px; /* Limita el ancho para evitar que crezca demasiado */
 }
+
 .menu-image {
-  width: 150px;
-  height: 150px;
+  width: 100%;
+  max-width: 150px;
+  height: auto; /* Mantiene la proporción */
   object-fit: cover;
   border-radius: 1rem;
 }
+
 .menu-text {
   display: block;
   margin-top: 0.5rem;
   font-size: 1.2rem;
+}
+
+/* ✅ Responsive para pantallas pequeñas */
+@media (max-width: 600px) {
+  .menu-title {
+    font-size: 1.5rem; /* Reduce el tamaño del título */
+  }
+
+  .menu-options {
+    flex-direction: column; /* Acomoda los elementos en columna */
+    align-items: center;
+  }
+
+  .menu-item {
+    max-width: 120px;
+  }
+
+  .menu-image {
+    max-width: 120px;
+  }
+
+  .menu-text {
+    font-size: 1rem;
+  }
 }

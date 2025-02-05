@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { size, rows, cols } from '../constant/constant'
+import { rows, cols } from '../constant/constant'
 import ActiveCoin from './ActiveCoinConnect4'
 import Winner from './WinnerConnect4'
 
@@ -9,7 +9,15 @@ const DropZone = () => {
   const [dropped, setDropped] = useState([])
   const [hoveredColumn, setHoveredColumn] = useState(null)
 
+  // Obtener el tamaño de la celda desde CSS
+  const getSize = () => {
+    return parseFloat(
+      getComputedStyle(document.documentElement).getPropertyValue('--size')
+    )
+  }
+
   const handleMouseMove = (e) => {
+    const size = getSize()
     const boardRect = e.currentTarget.getBoundingClientRect()
     const columnIndex = Math.floor((e.clientX - boardRect.left) / size)
     if (columnIndex >= 0 && columnIndex < cols) {
@@ -92,6 +100,16 @@ const DropZone = () => {
     setWinner(0)
   }
 
+  const transformValue = (m) => {
+    const size = getSize()
+    if (size === 80) {
+      return `translate(${m.y * size}px,${m.x * size + 98}px)`
+    }
+    if (size === 50) {
+      return `translate(${m.y * size}px,${m.x * size + 60}px)`
+    }
+  }
+
   return (
     <div
       className="conecta4-drop-zone"
@@ -103,7 +121,7 @@ const DropZone = () => {
           key={i}
           className={`p${m.player}`}
           style={{
-            transform: `translate(${m.y * size}px,${m.x * size + 120}px)`,
+            transform: transformValue(m),
           }}
         />
       ))}

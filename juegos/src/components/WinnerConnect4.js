@@ -24,7 +24,7 @@ const Winner = ({ winner, reset }) => {
         </button>
       </div>
     </div>,
-    modalRoot // Usamos el portal solo si modalRoot existe
+    modalRoot
   )
 }
 
