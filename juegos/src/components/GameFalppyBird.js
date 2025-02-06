@@ -1,75 +1,95 @@
-import styled from 'styled-components'
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import 'react-toastify/dist/ReactToastify.css'
+import styled from 'styled-components' // Import styled-components for CSS-in-JS
+import { useEffect, useState } from 'react' // Import React hooks for state and side effects
+import { useNavigate } from 'react-router-dom' // Import useNavigate for navigation
+import 'react-toastify/dist/ReactToastify.css' // Import CSS for toast notifications
 import ScoreBoard from './ScrcoreFlappyBird' // Import the ScoreBoard component
 
 // images
-import backgroundImage from './img/backgroundFlappyBird-day.png'
-import birdImage from './img/Pajaro.png'
-import objImage from './img/TorreVerde.png'
+import backgroundImage from './img/backgroundFlappyBird-day.png' // Background image
+import birdImage from './img/Pajaro.png' // Bird image
+import objImage from './img/TorreVerde.png' // Obstacle image
 
 // Constants to define game dimensions and physics
-const BIRD_HEIGHT = 28
-const BIRD_WIDTH = 33
-const WALL_HEIGHT = 600
-const WALL_WIDTH = 400
-const GRAVITY = 4 // Gravity value to increase the bird's falling speed
-const OBJ_WIDTH = 52
-const OBJ_SPEED = 8 // Speed at which the obstacles move
-const OBJ_GAP = 200
+const BIRD_HEIGHT = 28 // Bird height
+const BIRD_WIDTH = 33 // Bird width
+const WALL_HEIGHT = 600 // Wall (game area) height
+const WALL_WIDTH = 400 // Wall (game area) width
+const GRAVITY = 0.9 // Gravity constant
+const FLAP_STRENGTH = 10 // Flap strength (jump force)
+const MAX_VELOCITY = 15 // Maximum velocity of the bird
+const UPDATE_FREQUENCY = 16 // Update frequency in milliseconds
+const OBJ_WIDTH = 52 // Obstacle width
+const OBJ_SPEED = 12 // Obstacle speed
+const OBJ_GAP = 200 // Gap between obstacles
+const BACKGROUND_SPEED = 15 // Background speed
+const MIN_BIRD_POSITION = 0 // Minimum bird position (top)
+const MAX_BIRD_POSITION = WALL_HEIGHT - BIRD_HEIGHT // Maximum bird position (bottom)
 
 function App() {
-  const navigate = useNavigate()
+  const navigate = useNavigate() // Hook to navigate between routes
 
-  // Function to navigate back to the previous page
   const handleBack = () => {
     navigate(-1)
   }
 
-  const [isStart, setIsStart] = useState(false) // State to check if the game has started
-  const [birdpos, setBirdpos] = useState(300) // State to manage bird's position
-  const [objHeight, setObjHeight] = useState(0) // State to manage height of obstacles
-  const [objPos, setObjPos] = useState(WALL_WIDTH) // State to manage position of obstacles
-  const [score, setScore] = useState(0) // State to manage current score
-  const [highScore, setHighScore] = useState(0) // State to manage high score
+  const [isStart, setIsStart] = useState(false)
+  const [birdpos, setBirdpos] = useState(300)
+  const [velocity, setVelocity] = useState(0)
+  const [objHeight, setObjHeight] = useState(0)
+  const [objPos, setObjPos] = useState(WALL_WIDTH)
+  const [score, setScore] = useState(0)
+  const [highScore, setHighScore] = useState(0)
+  const [backgroundX, setBackgroundX] = useState(0)
 
-  // Retrieve the stored high score from local storage on component mount
   useEffect(() => {
-    const storedHighScore = localStorage.getItem('highScore')
+    const storedHighScore = localStorage.getItem('highScore') // Get high score from local storage
     if (storedHighScore) {
-      setHighScore(parseInt(storedHighScore))
+      setHighScore(parseInt(storedHighScore)) // Parse and set high score
     }
   }, [])
 
-  // Effect to apply gravity to the bird's position when the game is running
   useEffect(() => {
-    let intVal
-    if (isStart && birdpos < WALL_HEIGHT - BIRD_HEIGHT) {
+    let intVal // Interval ID
+    if (isStart) {
+      // If the game is started
       intVal = setInterval(() => {
-        setBirdpos((birdpos) => birdpos + GRAVITY)
-      }, 24)
+        // Set interval to update bird position
+        // Update velocity
+        setVelocity(
+          (prevVelocity) => Math.max(-MAX_VELOCITY, prevVelocity - GRAVITY) // Apply gravity, limit velocity
+        )
+
+        // Calculate new bird position
+        let newPos = birdpos - velocity
+
+        // Limit bird position
+        newPos = Math.max(
+          MIN_BIRD_POSITION,
+          Math.min(MAX_BIRD_POSITION, newPos)
+        )
+
+        // Set new bird position
+        setBirdpos(newPos)
+      }, UPDATE_FREQUENCY)
     }
     return () => clearInterval(intVal)
-  }, [isStart, birdpos])
+  }, [isStart, birdpos, velocity])
 
-  // Effect to move obstacles and reset their position once they go off screen
   useEffect(() => {
-    let objval
+    let objval // Interval ID
     if (isStart && objPos >= -OBJ_WIDTH) {
       objval = setInterval(() => {
         setObjPos((objPos) => objPos - OBJ_SPEED)
       }, 24)
-
       return () => clearInterval(objval)
     } else {
+      // If obstacles are off-screen
       setObjPos(WALL_WIDTH)
       setObjHeight(Math.floor(Math.random() * (WALL_HEIGHT - OBJ_GAP)))
       if (isStart) setScore((score) => score + 1)
     }
   }, [isStart, objPos])
 
-  // Update the high score if the current score exceeds the high score
   useEffect(() => {
     if (score > highScore) {
       setHighScore(score)
@@ -77,7 +97,6 @@ function App() {
     }
   }, [score, highScore])
 
-  // Effect to check for collisions between the bird and obstacles
   useEffect(() => {
     const topObj = birdpos >= 0 && birdpos < objHeight
     const bottomObj =
@@ -91,95 +110,101 @@ function App() {
     ) {
       setIsStart(false)
       setBirdpos(300)
+      setVelocity(0)
       setScore(0)
     }
   }, [isStart, birdpos, objHeight, objPos])
 
-  // Handle bird's jump when the game is running
   const handleStart = () => {
     if (!isStart) {
       setIsStart(true)
-    } else if (birdpos < BIRD_HEIGHT) {
-      setBirdpos(0)
     } else {
-      setBirdpos((birdpos) => birdpos - 50)
+      setVelocity(FLAP_STRENGTH)
     }
   }
 
+  useEffect(() => {
+    let backgroundInterval
+    if (isStart) {
+      backgroundInterval = setInterval(() => {
+        setBackgroundX((prevX) => prevX - BACKGROUND_SPEED)
+      }, UPDATE_FREQUENCY)
+    }
+    return () => clearInterval(backgroundInterval)
+  }, [isStart])
+
   return (
     <Home onClick={handleStart}>
+      {' '}
       <ScoreBoard score={score} highScore={highScore} />{' '}
-      {/* Integrate the ScoreBoard component */}
-      <Background height={WALL_HEIGHT} width={WALL_WIDTH}>
-        {!isStart ? <Startboard>Click To Start</Startboard> : null}
+      <Background
+        height={WALL_HEIGHT}
+        width={WALL_WIDTH}
+        style={{ backgroundPositionX: `${backgroundX}px` }} // Move background
+      >
+        {!isStart ? <Startboard>Click To Start</Startboard> : null}{' '}
         <Obj
           height={objHeight}
           width={OBJ_WIDTH}
           left={objPos}
           top={0}
           deg={180}
-        />
+        />{' '}
         <Bird
           height={BIRD_HEIGHT}
           width={BIRD_WIDTH}
           top={birdpos}
           left={100}
-        />
+        />{' '}
         <Obj
           height={WALL_HEIGHT - OBJ_GAP - objHeight}
           width={OBJ_WIDTH}
           left={objPos}
           top={WALL_HEIGHT - (objHeight + (WALL_HEIGHT - OBJ_GAP - objHeight))}
           deg={0}
-        />
+        />{' '}
+        {/* Bottom obstacle */}
       </Background>
-      <BackButton onClick={handleBack}>Regresar</BackButton>
+      <BackButton onClick={handleBack}>Regresar</BackButton> {/* Back button */}
     </Home>
   )
 }
 
 export default App
 
-// Styling for the home container
 const Home = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #f5f5f5; /* Light background */
+  background-color: #f5f5f5;
 `
 
-// Styling for the game background
 const Background = styled.div`
   background-image: url(${backgroundImage});
-  background-repeat: no-repeat;
+  background-repeat: repeat-x;
   background-position: center;
-  background-size: cover; /* Scale the image to fill the container */
+  background-size: cover;
   width: ${(props) => props.width}px;
   height: ${(props) => props.height}px;
   position: relative;
   overflow: hidden;
   border: 2px solid black;
-  margin-top: 50px; /* Add top margin */
+  margin-top: 50px;
 `
 
-// Styling for the bird
 const Bird = styled.div`
   position: absolute;
   background-image: url(${birdImage});
   background-repeat: no-repeat;
-  background-size: contain; /* Adjust the image */
+  background-size: contain;
   width: ${(props) => props.width}px;
   height: ${(props) => props.height}px;
-  top: ${(props) =>
-    props.top >= 0
-      ? props.top
-      : 0}px; /* Ensure it stays within the container */
+  top: ${(props) => props.top}px;
   left: ${(props) => props.left}px;
 `
 
-// Styling for the obstacles
 const Obj = styled.div`
   position: relative;
   background-image: url(${objImage});
@@ -190,7 +215,6 @@ const Obj = styled.div`
   transform: rotate(${(props) => props.deg}deg);
 `
 
-// Styling for the start board
 const Startboard = styled.div`
   position: relative;
   top: 49%;
@@ -206,9 +230,8 @@ const Startboard = styled.div`
   font-weight: 600;
 `
 
-//Stylinf for the back button
 const BackButton = styled.button`
-  background-color: #4caf50; /* Verde suave */
+  background-color: #4caf50;
   color: white;
   border: none;
   padding: 10px 20px;
