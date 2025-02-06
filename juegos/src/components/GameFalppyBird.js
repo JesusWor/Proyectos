@@ -237,7 +237,7 @@ const BackButton = styled.button`
   padding: 10px 20px;
   font-size: 1rem;
   border-radius: 5px;
-  margin: 20%;
+  margin: 30px;
   cursor: pointer;
   transition: background-color 0.3s;
   margin-top: auto;
