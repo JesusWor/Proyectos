@@ -6,6 +6,7 @@ import GameLogic from './components/logicaTicTac'
 import GameFlappyBird from './components/GameFalppyBird'
 import GameWordle from './components/WordleGame'
 import GameConecta4 from './components/Conecta4Game'
+import GameSnake from './components/SnakeGame'
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/FlappyBird" element={<GameFlappyBird />} />
         <Route path="/Wordle" element={<GameWordle />} />
         <Route path="/Conecta4" element={<GameConecta4 />} />
+        <Route path='/Snake' element={<GameSnake />} />
       </Routes>
     </Router>
   )

@@ -7,6 +7,7 @@ import LogoTicTac from './img/TicTacToe.png'
 import LogoFlappyBird from './img/FlappyBird.png'
 import LogoWordle from './img/logoWordle.png'
 import LogoConecta4 from './img/logoConecta4.png'
+import LogoSnake from './img/LogoSnake.png'
 
 function Menu() {
   return (
@@ -34,6 +35,11 @@ function Menu() {
           <span className="menu-text">Conecta 4</span>
         </Link>
       </div>
+      {/* Snake */}
+      <Link to="/Snake" className='menu-item'>
+        <img src={LogoSnake} alt='Serpiente' className='menu-image' />
+        <span className='menu-text' >Snake</span>
+      </Link>
 
       <div className="menu-options"></div>
     </div>

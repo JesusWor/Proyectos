@@ -19,7 +19,7 @@ const FLAP_STRENGTH = 11 // Flap strength (jump force)
 const MAX_VELOCITY = 15 // Maximum velocity of the bird
 const UPDATE_FREQUENCY = 16 // Update frequency in milliseconds
 const OBJ_WIDTH = 52 // Obstacle width
-const OBJ_SPEED = 9.5 // Obstacle speed
+const OBJ_SPEED = 9 // Obstacle speed
 const OBJ_GAP = 200 // Gap between obstacles
 const BACKGROUND_SPEED = 5 // Background speed
 const MIN_BIRD_POSITION = 0 // Minimum bird position (top)
@@ -56,7 +56,8 @@ function App() {
         // Set interval to update bird position
         // Update velocity
         setVelocity(
-          (prevVelocity) => Math.max(-MAX_VELOCITY, prevVelocity - GRAVITY) // Apply gravity, limit velocity
+          // (prevVelocity) => Math.max(-MAX_VELOCITY, prevVelocity  + 0.15 - GRAVITY) // Apply gravity, limit velocity
+          (prevVelocity) => Math.max(-MAX_VELOCITY, prevVelocity - GRAVITY)
         )
 
         // Calculate new bird position
