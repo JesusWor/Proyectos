@@ -1,47 +1,78 @@
-.game-container {
+.game-container-snake {
+    overflow: hidden;
+    touch-action: none;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: auto;
-    background-color: #727272;
+    width: 100%;
+    height: 100%;
+    margin-top: 30%;
 }
 
-.game-board {
+.game-board-snake {
     position: relative;
-    width: 400px;
-    height: 400px;
+    width: 90vmin;
+    height: 90vmin;
     background-color: black;
     border: 2px solid white;
     display: flex;
     flex-wrap: wrap;
+    margin: auto;
 }
 
-.snake-segment {
+.snake-segment-snake,
+.food-snake {
     position: absolute;
-    width: 20px;
-    height: 20px;
+    width: 5%;
+    height: 5%;
+    box-sizing: border-box;
+}
+
+.snake-segment-snake {
     background-color: limegreen;
     border: 1px solid darkgreen;
 }
 
-.food {
-    position: absolute;
-    width: 20px;
-    height: 20px;
+.food-snake {
     background-color: red;
     border-radius: 50%;
 }
 
-.score {
-    color: white;
-    font-size: 20px;
-    margin-top: 10px;
+.score-snake {
+    font-size: 5vmin;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 2vmin;
 }
 
-.game-over {
+.game-over-snake {
     color: red;
-    font-size: 24px;
+    font-size: 6vmin;
     font-weight: bold;
-    margin-top: 10px;
+    margin-top: 2vmin;
+    text-align: center;
+}
+
+.reset-button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 2vmin 4vmin;
+    font-size: 4vmin;
+    border-radius: 1vmin;
+    margin: 2vmin;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.reset-button:hover {
+    background-color: #45a049;
+}
+
+@media only screen and (max-width: 768px){
+    .game-container-snake{
+        margin-top: 5%;
+    }
 }

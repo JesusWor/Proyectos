@@ -9,19 +9,22 @@ import backgroundImage from './img/backgroundFlappyBird-day.png' // Background i
 import birdImage from './img/Pajaro.png' // Bird image
 import objImage from './img/TorreVerde.png' // Obstacle image
 
+// Constante para saber si el juego esta en dispositivo movil
+const isMobile = window.innerWidth <= 768; // Detectar dispositivos móviles
+
 // Constants to define game dimensions and physics
 const BIRD_HEIGHT = 28 // Bird height
 const BIRD_WIDTH = 33 // Bird width
 const WALL_HEIGHT = 600 // Wall (game area) height
 const WALL_WIDTH = 400 // Wall (game area) width
-const GRAVITY = 0.92 // Gravity constant
-const FLAP_STRENGTH = 11 // Flap strength (jump force)
+const GRAVITY = isMobile ? 0.55 : 0.92; // Gravity constant
+const FLAP_STRENGTH = isMobile? 7 : 11 // Flap strength (jump force)
 const MAX_VELOCITY = 15 // Maximum velocity of the bird
-const UPDATE_FREQUENCY = 16 // Update frequency in milliseconds
+const UPDATE_FREQUENCY = 15 // Update frequency in milliseconds
 const OBJ_WIDTH = 52 // Obstacle width
-const OBJ_SPEED = 9 // Obstacle speed
+const OBJ_SPEED = isMobile ? 6 : 9; // Obstacle speed
 const OBJ_GAP = 200 // Gap between obstacles
-const BACKGROUND_SPEED = 5 // Background speed
+const BACKGROUND_SPEED = isMobile? 3 : 5 // Background speed
 const MIN_BIRD_POSITION = 0 // Minimum bird position (top)
 const MAX_BIRD_POSITION = WALL_HEIGHT - BIRD_HEIGHT // Maximum bird position (bottom)
 
@@ -40,6 +43,18 @@ function App() {
   const [score, setScore] = useState(0)
   const [highScore, setHighScore] = useState(0)
   const [backgroundX, setBackgroundX] = useState(0)
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+// Detectar si el usuario cambia de tamaño la pantalla
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
 
   useEffect(() => {
     const storedHighScore = localStorage.getItem('highScore') // Get high score from local storage

@@ -20,6 +20,7 @@
   color: inherit;
   text-align: center;
   max-width: 150px; /* Limita el ancho para evitar que crezca demasiado */
+  margin: auto;
 }
 
 .menu-image {
